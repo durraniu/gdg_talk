@@ -1,0 +1,123 @@
+---
+title: "Catching Fire: Scaling Shiny Apps with Google's Firebase"
+author: "Umair Durrani"
+execute: 
+  eval: false
+  echo: true
+format: revealjs
+---
+
+# The app
+
+##
+
+```{=html}
+<iframe width="800" height="800" src="https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_f3eb35a9/?" title="Shiny app"></iframe>
+```
+
+
+# Get Started
+
+## Create Project
+
+![](firebase_create_project.PNG)
+
+## Give your project a name
+
+
+![](firebase_create_project_step1.PNG)
+
+## Enable Google Analytics (Optional)
+
+![](firebase_create_project_step2.PNG)
+
+
+## {background-image="firebase_project_created.PNG"}
+
+
+# Create an app
+
+## Select web app
+
+![](firebase_create_app.PNG)
+
+## Give your app a name
+
+![](firebase_create_app_1.PNG)
+
+## {background-image="firebase_create_app_2.PNG" background-size="800px"}
+
+<!--![](firebase_create_app_2.PNG)-->
+
+## Now you can add authentication to your app
+
+![](firebase_app_created.PNG)
+
+
+# Authentication
+
+## {background-image="firebase_authentication1.PNG" background-size="1200px"}
+
+
+## Choose sign-in methods
+
+![](firebase_authentication2.PNG)
+
+
+## Gmail {background-image="firebase_authentication3.PNG"}
+
+<!-- ![](firebase_authentication3.PNG) -->
+
+
+## You may also enable sign-in via email
+
+![](firebase_authentication4.PNG)
+
+
+## Add users manually 
+
+![](firebase_authentication5.PNG)
+
+
+
+
+
+# Build the app using {shiny}
+
+## Authentication {margin=1}
+
+:::: {.columns}
+
+::: {.column width="70%"}
+Firebase project settings
+
+![](firebase_create_app_2.PNG)
+:::
+
+::: {.column width="30%"}
+Shiny app (`global.R`)
+
+```{r}
+#| code-line-numbers: "5-10"
+polished::polished_config(
+    app_name = Sys.getenv("APP_NAME"),
+    api_key = Sys.getenv("POLISHED_API_KEY"),
+
+    firebase_config = list(
+      apiKey = Sys.getenv("FIREBASE_API_KEY"),
+      authDomain = Sys.getenv("AUTH_DOMAIN"),
+      projectId = Sys.getenv("PROJECT_ID")
+    ),
+    sign_in_providers = c("google", "email")
+  )
+```
+:::
+
+::::
+
+
+
+
+
+
+
