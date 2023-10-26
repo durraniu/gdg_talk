@@ -1,13 +1,52 @@
 ---
-title: "Catching Fire: Scaling Shiny Apps with Google's Firebase"
+title: "Catching 🔥: Scaling Shiny Apps with Google's Firebase"
 author: "Umair Durrani"
 execute: 
   eval: false
   echo: true
-format: revealjs
+highlight-style: vim-dark
+format: 
+  revealjs:
+    #incremental: true
+    #footer: "`emitanaka.org/slides/toronto2022`"
+    slide-number: true
+    multiplex: true
+    theme: [simple, assets/monash.scss]
+    show-slide-number: all
+    controls: true
+    width: 1280
+    height: 720
+    css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css]
 ---
 
-# The app
+## What is shiny?
+
+::: info-box
+
+An R package that lets you create web applications with no knowledge* of HTML / CSS / Javascript  
+
+:::
+
+. . . 
+
+  \  
+  
+
+**Web applications?** Software that you access and use in a web browser  
+  
+  \  
+  \  
+    
+. . . 
+
+\* mostly
+
+
+## What about python?
+
+![](shiny_r_python.png)
+
+# Let's take a look at an example app
 
 ##
 
@@ -16,7 +55,28 @@ format: revealjs
 ```
 
 
-# Get Started
+
+# Getting Started {background-color="#b22626"}
+
+
+## Structure of a shiny app
+
+```{r}
+library(shiny)
+
+ui <- fluidPage(
+  
+)
+
+server <- function(input, output, session) {
+  
+}
+
+shinyApp(ui, server)
+```
+
+
+
 
 ## Create Project
 
@@ -84,36 +144,53 @@ format: revealjs
 
 # Build the app using {shiny}
 
-## Authentication {margin=1}
-
-:::: {.columns}
-
-::: {.column width="70%"}
-Firebase project settings
-
-![](firebase_create_app_2.PNG)
-:::
-
-::: {.column width="30%"}
-Shiny app (`global.R`)
+## Authentication
 
 ```{r}
 #| code-line-numbers: "5-10"
 polished::polished_config(
-    app_name = Sys.getenv("APP_NAME"),
-    api_key = Sys.getenv("POLISHED_API_KEY"),
+    app_name = "APP_NAME",
+    api_key = "POLISHED_API_KEY",
 
     firebase_config = list(
-      apiKey = Sys.getenv("FIREBASE_API_KEY"),
-      authDomain = Sys.getenv("AUTH_DOMAIN"),
-      projectId = Sys.getenv("PROJECT_ID")
+      apiKey = "FIREBASE_API_KEY",
+      authDomain = "AUTH_DOMAIN",
+      projectId = "PROJECT_ID"
     ),
     sign_in_providers = c("google", "email")
   )
 ```
-:::
 
-::::
+
+## Programmatically add users and sign in
+
+Define a function:  
+```{r}
+#| code-line-numbers: "1|2-3|4|5-10|13"
+sign.in <- function(email, password, api_key) {
+  r <- httr::POST(paste0("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=", api_key),
+    httr::add_headers("Content-Type" = "application/json"),
+    body = jsonlite::toJSON(
+      list(
+        email = email,
+        password = password,
+        returnSecureToken = TRUE
+      ),
+      auto_unbox = TRUE
+    )
+  )
+  return(httr::content(r))
+}
+```
+
+. . .   
+
+Use the function:
+```{r}
+user <- sign.in("user_email",  "user_password", api_key)
+```
+
+
 
 
 
