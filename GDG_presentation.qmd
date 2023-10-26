@@ -4,7 +4,7 @@ author: "Umair Durrani"
 execute: 
   eval: false
   echo: true
-highlight-style: vim-dark
+highlight-style: github
 format: 
   revealjs:
     #incremental: true
@@ -188,12 +188,212 @@ sign.in <- function(email, password, api_key) {
 Use the function:
 ```{r}
 user <- sign.in("user_email",  "user_password", api_key)
+accessToken <- user$idToken
+email <- user$email
 ```
 
 
+## Sign out
+
+:::: {.columns}
+
+::: {.column width="50%"}
+User Interface (UI):
+
+```{r}
+actionButton(inputId = "sign_out", label = "Sign Out")
+```
+
+:::
+  
+::: {.column width="50%"}
+Server:
+
+```{r}
+  observeEvent(input$sign_out, {
+    polished::sign_out_from_shiny()
+    session$reload()
+  })
+```
+
+:::
+  
+::::
+
+![](shiny_sign_out.png){width=50%}
 
 
 
+## Getting `inputs` from user
+
+:::: {.columns}
+
+::: {.column width="60%"}
+UI:
+
+```{r}
+tagList(
+# sex
+  radioGroupButtons(
+    inputId = "sex",
+    label = "Are you a girl or a boy?",
+    choices = list("Girl" = 1L, "Boy" = 0L),
+    status = "primary",
+    selected = character(0)
+  ),
+  
+  # age
+  sliderInput(
+    inputId = "age",
+    label = "What is your age?",
+    min = 12,
+    max = 18,
+    value = 15,
+    step = 1
+  ),
+  
+  # career
+  radioGroupButtons(
+    inputId = "career",
+    label = "I am a career tribute.",
+    choices = list("Yes" = 1L, "No" = 0L),
+    status = "primary",
+    selected = character(0)
+  ),
+  
+  # rating
+  sliderInput(
+    inputId = "rating",
+    label = "How would you rate your survival skills?",
+    min = 3,
+    max = 11,
+    value = 5,
+    step = 1
+  )
+)
+```
+
+
+:::
+  
+::: {.column width="40%"}
+![](shiny_form.png)
+:::
+  
+::::
+
+
+## Getting `inputs` from user
+
+:::: {.columns}
+
+::: {.column width="50%"}
+UI:
+
+```{r}
+#| code-line-numbers: "4|13|23|32"
+tagList(
+  # sex
+  radioGroupButtons(
+    inputId = "sex",
+    label = "Are you a girl or a boy?",
+    choices = list("Girl" = 1L, "Boy" = 0L),
+    status = "primary",
+    selected = character(0)
+  ),
+  
+  # age
+  sliderInput(
+    inputId = "age",
+    label = "What is your age?",
+    min = 12,
+    max = 18,
+    value = 15,
+    step = 1
+  ),
+  
+  # career
+  radioGroupButtons(
+    inputId = "career",
+    label = "I am a career tribute.",
+    choices = list("Yes" = 1L, "No" = 0L),
+    status = "primary",
+    selected = character(0)
+  ),
+  
+  # rating
+  sliderInput(
+    inputId = "rating",
+    label = "How would you rate your survival skills?",
+    min = 3,
+    max = 11,
+    value = 5,
+    step = 1
+  )
+)
+```
+
+
+:::
+  
+::: {.column width="50%"}
+Server:
+
+```{r}
+#| code-line-numbers: "4|5|6|7"
+# Form inputs in one list
+form_inputs <- reactive({
+  list(
+   sex    = input$sex,
+   age    = input$age,
+   career = input$career,
+   rating = input$rating
+  )
+})
+
+# Send data to firestore when 'Submit' is clicked
+observeEvent(
+      input$form_submit,
+      {
+      ## Convert data to json structure
+        form_data_list <- toJSON(list(
+          fields = list(
+            uid = list("stringValue" = email()),
+            Sex = list("integerValue" = form_inputs()[["sex"]]),
+            Age = list("integerValue" = form_inputs()[["age"]]),
+            Career = list("integerValue" = form_inputs()[["career"]]),
+            Rating = list("integerValue" = form_inputs()[["rating"]])
+          )
+        ), auto_unbox = TRUE)
+
+
+        ## writing data
+        endpoint_quiz <- "projects/gdg-demo-b8928/databases/(default)/documents/Quiz"
+        
+        
+        write.db <- function(db_endpoint, data, auth_token) {
+  r <- httr::POST(sprintf("https://firestore.googleapis.com/v1beta1/%s", db_endpoint),
+    httr::add_headers(
+      "Content-Type" = "application/json",
+      "Authorization" = paste("Bearer", auth_token)
+    ),
+    body = data
+  )
+  return(r)
+}
+        
+        write_request_quiz <- write.db(
+          db_endpoint = paste0(endpoint_quiz, "?documentId=", email()),
+          data = form_data_list,
+          auth_token = accessToken()
+        )
+    }
+)
+```
+
+:::
+  
+::::
 
 
 
