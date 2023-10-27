@@ -1,5 +1,5 @@
 ---
-title: "Catching 🔥: Scaling Shiny Apps with Google's Firebase"
+title: "Catching <img src='https://cdn3.emoji.gg/emojis/3565-200w.gif' width='80px' height='100px' alt='200w'>: Scaling Shiny Apps with Google's Firebase"
 author: "Umair Durrani"
 execute: 
   eval: false

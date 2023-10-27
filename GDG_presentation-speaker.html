@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Umair Durrani">
-  <title>Catching 🔥: Scaling Shiny Apps with Google’s Firebase</title>
+  <title>Catching : Scaling Shiny Apps with Google’s Firebase</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -393,7 +393,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Catching 🔥: Scaling Shiny Apps with Google’s Firebase</h1>
+  <h1 class="title">Catching <img src="https://cdn3.emoji.gg/emojis/3565-200w.gif" width="80px" height="100px" alt="200w">: Scaling Shiny Apps with Google’s Firebase</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -731,117 +731,6 @@ Umair Durrani
 </div>
 </div>
 </div>
-</section>
-<section id="something" class="slide level2">
-<h2>something</h2>
-<div class="code-container">
-<div class="left-code">
-<pre><code>::: {.cell}
-
-```{.r .cell-code  code-line-numbers="4|13|23|32"}
-tagList(
-  # sex
-  radioGroupButtons(
-    inputId = "sex",
-    label = "Are you a girl or a boy?",
-    choices = list("Girl" = 1L, "Boy" = 0L),
-    status = "primary",
-    selected = character(0)
-  ),
-  
-  # age
-  sliderInput(
-    inputId = "age",
-    label = "What is your age?",
-    min = 12,
-    max = 18,
-    value = 15,
-    step = 1
-  ),
-  
-  # career
-  radioGroupButtons(
-    inputId = "career",
-    label = "I am a career tribute.",
-    choices = list("Yes" = 1L, "No" = 0L),
-    status = "primary",
-    selected = character(0)
-  ),
-  
-  # rating
-  sliderInput(
-    inputId = "rating",
-    label = "How would you rate your survival skills?",
-    min = 3,
-    max = 11,
-    value = 5,
-    step = 1
-  )
-```
-:::</code></pre>
-</div>
-<div class="right-code">
-<pre><code>::: {.cell}
-
-```{.r .cell-code  code-line-numbers="4|5|6|7"}
-# Form inputs in one list
-form_inputs &lt;- reactive({
-  list(
-   sex    = input$sex,
-   age    = input$age,
-   career = input$career,
-   rating = input$rating
-  )
-})
-
-# Send data to firestore when 'Submit' is clicked
-observeEvent(
-      input$form_submit,
-      {
-      ## Convert data to json structure
-        form_data_list &lt;- toJSON(list(
-          fields = list(
-            uid = list("stringValue" = email()),
-            Sex = list("integerValue" = form_inputs()[["sex"]]),
-            Age = list("integerValue" = form_inputs()[["age"]]),
-            Career = list("integerValue" = form_inputs()[["career"]]),
-            Rating = list("integerValue" = form_inputs()[["rating"]])
-          )
-        ), auto_unbox = TRUE)
-
-        // ... (rest of your code)
-
-      }
-```
-:::</code></pre>
-</div>
-</div>
-<script>
-  var container = document.querySelector('.code-container');
-  var leftCode = document.querySelector('.left-code');
-  var rightCode = document.querySelector('.right-code');
-
-  // Add event listener for scroll synchronization
-  container.addEventListener('scroll', function () {
-    // Calculate the scroll percentage
-    var scrollPercentage = (container.scrollTop / (container.scrollHeight - container.clientHeight)) * 100;
-
-    // Calculate the line to highlight based on scrollPercentage
-    var totalLines = 32; // Total number of lines
-    var lineToHighlight = Math.round((totalLines - 1) * (scrollPercentage / 100)) + 1;
-
-    // Add or remove a class to highlight the lines
-    for (var i = 1; i <= totalLines; i++) {
-      if (i === lineToHighlight) {
-        leftCode.querySelector('.line-' + i).classList.add('highlight');
-        rightCode.querySelector('.line-' + i).classList.add('highlight');
-      } else {
-        leftCode.querySelector('.line-' + i).classList.remove('highlight');
-        rightCode.querySelector('.line-' + i).classList.remove('highlight');
-      }
-    }
-  });
-</script>
 <div class="footer footer-default">
 
 </div>
