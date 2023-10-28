@@ -19,6 +19,65 @@ format:
     css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css]
 ---
 
+## About me
+
+:::: {.columns}
+
+::: {.column width="30%"}
+![](umair.png){width=70%}
+:::
+  
+::: {.column width="70%"}
+Hi, I am Umair Durrani  
+
+* **Data Scientist** at Preseage Group 
+  - Human factors and analytics
+  
+* Part-time **Instructor** at St. Clair College  
+
+* PhD in Civil Engineering
+:::
+  
+::::
+. . .  
+
+::: {.callout-important title="Confession"}
+**I am not a developer**
+:::
+
+
+
+## First project at the current job
+
+> You are going to develop a robust application that will contain confidential data
+
+. . .  
+
+> *... It will be used by thousands of people*
+
+
+
+
+## I am a developer?
+
+::: {.r-stack}
+![](app_demo1.PNG){.fragment width="600"}
+
+![](app_demo2.PNG){.fragment width="500"}
+
+![](app_demo3.gif){.fragment width="600"}
+![](app_demo4.gif){.fragment width="600"}
+:::
+
+
+
+# Shiny to the rescue!
+
+![](shiny.png)
+
+
+
+
 ## What is shiny?
 
 ::: info-box
@@ -50,13 +109,53 @@ An R package that lets you create web applications with no knowledge* of HTML / 
 
 ##
 
-```{=html}
-<iframe width="800" height="800" src="https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_f3eb35a9/?" title="Shiny app"></iframe>
-```
+![](app_demo.gif)
+
+[Live app link](https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_6fdce7ab/?page=sign_in) 
+
 
 
 
 # Getting Started {background-color="#b22626"}
+
+
+## Business Logic
+
+Create a model to predict chances of survival in the Hunger Games:
+```{r}
+make_prediction <- function(sex, age, career, rating_rand){
+
+  if (is.null(sex) | is.null(age) | is.null(career) | is.null(rating_rand)){
+    return(NULL)
+  }
+ predict(
+    "SAVED MODEL",
+    tibble::tibble(
+      sex = sex, age = age, career = career, rating_rand = rating_rand
+    ),
+    type = "survival",
+    eval_time = c(1L, 10L, 20L)
+  ) |>
+    tidyr::unnest(col = .pred)
+}
+```
+
+
+## Business Logic
+
+Use the function:
+
+```{r}
+make_prediction(1L, 18L, 0L, 13)
+# # A tibble: 3 × 2
+#   .eval_time .pred_survival
+#        <dbl>          <dbl>
+# 1          1          0.991
+# 2         10          0.971
+# 3         20          0.932
+```
+
+
 
 
 ## Structure of a shiny app
@@ -64,10 +163,12 @@ An R package that lets you create web applications with no knowledge* of HTML / 
 ```{r}
 library(shiny)
 
+# User Interface
 ui <- fluidPage(
   
 )
 
+# Server
 server <- function(input, output, session) {
   
 }
@@ -76,6 +177,35 @@ shinyApp(ui, server)
 ```
 
 
+
+
+
+
+## Structure of a shiny app
+
+```{r}
+library(shiny)
+
+# User Interface
+ui <- fluidPage(
+  # Display inputs and outputs
+)
+
+# Server
+server <- function(input, output, session) {
+  # Calculate chances of survival from the user inputs
+}
+
+shinyApp(ui, server)
+```
+
+
+
+
+# Scaling the app via Firebase {background-color="#b22626"}
+
+* Authentication  
+* Creating, Reading, Writing, Updating, and Deleting user data (Firestore)
 
 
 ## Create Project
@@ -87,12 +217,17 @@ shinyApp(ui, server)
 
 ![](firebase_create_project_step1.PNG)
 
+
+
+
 ## Enable Google Analytics (Optional)
 
 ![](firebase_create_project_step2.PNG)
 
 
 ## {background-image="firebase_project_created.PNG"}
+
+
 
 
 # Create an app
@@ -108,6 +243,9 @@ shinyApp(ui, server)
 ## {background-image="firebase_create_app_2.PNG" background-size="800px"}
 
 <!--![](firebase_create_app_2.PNG)-->
+
+
+
 
 ## Now you can add authentication to your app
 
@@ -142,7 +280,7 @@ shinyApp(ui, server)
 
 
 
-# Build the app using {shiny}
+# Using Firebase in {shiny}
 
 ## Authentication
 
@@ -160,6 +298,11 @@ polished::polished_config(
     sign_in_providers = c("google", "email")
   )
 ```
+
+
+## Firestore Database
+
+![](cloud_firestore.PNG)
 
 
 ## Programmatically add users and sign in
@@ -340,7 +483,7 @@ tagList(
 Server:
 
 ```{r}
-#| code-line-numbers: "4|5|6|7"
+#| code-line-numbers: "4-7|12-48"
 # Form inputs in one list
 form_inputs <- reactive({
   list(
@@ -396,5 +539,60 @@ observeEvent(
 ::::
 
 
+## On Firestore
+
+![](quiz_fs.PNG)
 
 
+
+## Display Prediction
+
+:::: {.columns}
+
+::: {.column width="50%"}
+User Interface (UI):
+
+```{r}
+uiOutput("display_pred")
+```
+
+:::
+  
+::: {.column width="50%"}
+Server:
+
+```{r}
+  output$display_pred <- renderUI({
+      # requires user input
+      req(form_list())
+    
+    # Predictions
+    pred_text <- reactive({
+      req(form_list)
+      user_inputs <- form_list()$in_form
+
+      user_preds <- make_prediction(user_inputs$sex,
+                                    user_inputs$age,
+                                    user_inputs$career,
+                                    user_inputs$rating)
+      if(is.null(user_preds)){
+        return(NULL)
+      }
+
+      # PRETTY PRINTING OF PREDICTIONS
+    })
+  })
+```
+
+:::
+  
+::::
+
+![](pretty_print.PNG)
+
+
+# Thank you {background-color="#FFA500"}
+
+[Live app link](https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_6fdce7ab/?page=sign_in) 
+
+[Github Repo](https://github.com/durraniu/gdg) 

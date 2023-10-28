@@ -404,6 +404,63 @@ Umair Durrani
 </div>
 
 </section>
+<section id="about-me" class="slide level2">
+<h2>About me</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><img data-src="umair.png" style="width:70.0%"></p>
+</div><div class="column" style="width:70%;">
+<p>Hi, I am Umair Durrani</p>
+<ul>
+<li><p><strong>Data Scientist</strong> at Preseage Group</p>
+<ul>
+<li>Human factors and analytics</li>
+</ul></li>
+<li><p>Part-time <strong>Instructor</strong> at St.&nbsp;Clair College</p></li>
+<li><p>PhD in Civil Engineering</p></li>
+</ul>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Confession</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>I am not a developer</strong></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="first-project-at-the-current-job" class="slide level2">
+<h2>First project at the current job</h2>
+<blockquote>
+<p>You are going to develop a robust application that will contain confidential data</p>
+</blockquote>
+<div class="fragment">
+<blockquote>
+<p><em>… It will be used by thousands of people</em></p>
+</blockquote>
+</div>
+</section>
+<section id="i-am-a-developer" class="slide level2">
+<h2>I am a developer?</h2>
+<div class="r-stack">
+<p><img data-src="app_demo1.PNG" class="fragment" width="600"></p>
+<p><img data-src="app_demo2.PNG" class="fragment" width="500"></p>
+<p><img data-src="app_demo3.gif" class="fragment" width="600"> <img data-src="app_demo4.gif" class="fragment" width="600"></p>
+</div>
+</section>
+<section>
+<section id="shiny-to-the-rescue" class="title-slide slide level1 center">
+<h1>Shiny to the rescue!</h1>
+
+<img data-src="shiny.png" class="r-stretch"></section>
 <section id="what-is-shiny" class="slide level2">
 <h2>What is shiny?</h2>
 <div class="info-box">
@@ -421,7 +478,7 @@ Umair Durrani
 <section id="what-about-python" class="slide level2">
 <h2>What about python?</h2>
 
-<img data-src="shiny_r_python.png" class="r-stretch"></section>
+<img data-src="shiny_r_python.png" class="r-stretch"></section></section>
 <section>
 <section id="lets-take-a-look-at-an-example-app" class="title-slide slide level1 center">
 <h1>Let’s take a look at an example app</h1>
@@ -429,28 +486,92 @@ Umair Durrani
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<iframe width="800" height="800" src="https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_f3eb35a9/?" title="Shiny app"></iframe>
+
+<img data-src="app_demo.gif" class="r-stretch"><p><a href="https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_6fdce7ab/?page=sign_in">Live app link</a></p>
 </section></section>
 <section>
 <section id="getting-started" class="title-slide slide level1 center" data-background-color="#b22626">
 <h1>Getting Started</h1>
 
 </section>
+<section id="business-logic" class="slide level2">
+<h2>Business Logic</h2>
+<p>Create a model to predict chances of survival in the Hunger Games:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>make_prediction <span class="ot">&lt;-</span> <span class="cf">function</span>(sex, age, career, rating_rand){</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(sex) <span class="sc">|</span> <span class="fu">is.null</span>(age) <span class="sc">|</span> <span class="fu">is.null</span>(career) <span class="sc">|</span> <span class="fu">is.null</span>(rating_rand)){</span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  }</span>
+<span id="cb1-6"><a href="#cb1-6"></a> <span class="fu">predict</span>(</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="st">"SAVED MODEL"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb1-9"><a href="#cb1-9"></a>      <span class="at">sex =</span> sex, <span class="at">age =</span> age, <span class="at">career =</span> career, <span class="at">rating_rand =</span> rating_rand</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    ),</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">type =</span> <span class="st">"survival"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">eval_time =</span> <span class="fu">c</span>(1L, 10L, 20L)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    tidyr<span class="sc">::</span><span class="fu">unnest</span>(<span class="at">col =</span> .pred)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="business-logic-1" class="slide level2">
+<h2>Business Logic</h2>
+<p>Use the function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">make_prediction</span>(1L, 18L, 0L, <span class="dv">13</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># # A tibble: 3 × 2</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#   .eval_time .pred_survival</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#        &lt;dbl&gt;          &lt;dbl&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># 1          1          0.991</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># 2         10          0.971</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># 3         20          0.932</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="structure-of-a-shiny-app" class="slide level2">
 <h2>Structure of a shiny app</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb1-4"><a href="#cb1-4"></a>  </span>
-<span id="cb1-5"><a href="#cb1-5"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  </span>
-<span id="cb1-9"><a href="#cb1-9"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10"></a></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># User Interface</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Server</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  </span>
+<span id="cb3-11"><a href="#cb3-11"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12"></a></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="structure-of-a-shiny-app-1" class="slide level2">
+<h2>Structure of a shiny app</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># User Interface</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="co"># Display inputs and outputs</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># Server</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="co"># Calculate chances of survival from the user inputs</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>}</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
+<section>
+<section id="scaling-the-app-via-firebase" class="title-slide slide level1 center" data-background-color="#b22626">
+<h1>Scaling the app via Firebase</h1>
+<ul>
+<li>Authentication<br>
+</li>
+<li>Creating, Reading, Writing, Updating, and Deleting user data (Firestore)</li>
+</ul>
 </section>
 <section id="create-project" class="slide level2">
 <h2>Create Project</h2>
@@ -513,51 +634,55 @@ Umair Durrani
 
 <img data-src="firebase_authentication5.PNG" class="r-stretch"></section></section>
 <section>
-<section id="build-the-app-using-shiny" class="title-slide slide level1 center">
-<h1>Build the app using {shiny}</h1>
+<section id="using-firebase-in-shiny" class="title-slide slide level1 center">
+<h1>Using Firebase in {shiny}</h1>
 
 </section>
 <section id="authentication-1" class="slide level2">
 <h2>Authentication</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="5-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>polished<span class="sc">::</span><span class="fu">polished_config</span>(</span>
-<span id="cb2-2"><a href="#cb2-2"></a>    <span class="at">app_name =</span> <span class="st">"APP_NAME"</span>,</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">api_key =</span> <span class="st">"POLISHED_API_KEY"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="at">firebase_config =</span> <span class="fu">list</span>(</span>
-<span id="cb2-6"><a href="#cb2-6"></a>      <span class="at">apiKey =</span> <span class="st">"FIREBASE_API_KEY"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>      <span class="at">authDomain =</span> <span class="st">"AUTH_DOMAIN"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>      <span class="at">projectId =</span> <span class="st">"PROJECT_ID"</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>    ),</span>
-<span id="cb2-10"><a href="#cb2-10"></a>    <span class="at">sign_in_providers =</span> <span class="fu">c</span>(<span class="st">"google"</span>, <span class="st">"email"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="5-10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>polished<span class="sc">::</span><span class="fu">polished_config</span>(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    <span class="at">app_name =</span> <span class="st">"APP_NAME"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="at">api_key =</span> <span class="st">"POLISHED_API_KEY"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">firebase_config =</span> <span class="fu">list</span>(</span>
+<span id="cb5-6"><a href="#cb5-6"></a>      <span class="at">apiKey =</span> <span class="st">"FIREBASE_API_KEY"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>      <span class="at">authDomain =</span> <span class="st">"AUTH_DOMAIN"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>      <span class="at">projectId =</span> <span class="st">"PROJECT_ID"</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    ),</span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="at">sign_in_providers =</span> <span class="fu">c</span>(<span class="st">"google"</span>, <span class="st">"email"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="firestore-database" class="slide level2">
+<h2>Firestore Database</h2>
+
+<img data-src="cloud_firestore.PNG" class="r-stretch"></section>
 <section id="programmatically-add-users-and-sign-in" class="slide level2">
 <h2>Programmatically add users and sign in</h2>
 <p>Define a function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="1|2-3|4|5-10|13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sign.in <span class="ot">&lt;-</span> <span class="cf">function</span>(email, password, api_key) {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(<span class="fu">paste0</span>(<span class="st">"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="</span>, api_key),</span>
-<span id="cb3-3"><a href="#cb3-3"></a>    httr<span class="sc">::</span><span class="fu">add_headers</span>(<span class="st">"Content-Type"</span> <span class="ot">=</span> <span class="st">"application/json"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">body =</span> jsonlite<span class="sc">::</span><span class="fu">toJSON</span>(</span>
-<span id="cb3-5"><a href="#cb3-5"></a>      <span class="fu">list</span>(</span>
-<span id="cb3-6"><a href="#cb3-6"></a>        <span class="at">email =</span> email,</span>
-<span id="cb3-7"><a href="#cb3-7"></a>        <span class="at">password =</span> password,</span>
-<span id="cb3-8"><a href="#cb3-8"></a>        <span class="at">returnSecureToken =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>      ),</span>
-<span id="cb3-10"><a href="#cb3-10"></a>      <span class="at">auto_unbox =</span> <span class="cn">TRUE</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a>    )</span>
-<span id="cb3-12"><a href="#cb3-12"></a>  )</span>
-<span id="cb3-13"><a href="#cb3-13"></a>  <span class="fu">return</span>(httr<span class="sc">::</span><span class="fu">content</span>(r))</span>
-<span id="cb3-14"><a href="#cb3-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="1|2-3|4|5-10|13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>sign.in <span class="ot">&lt;-</span> <span class="cf">function</span>(email, password, api_key) {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(<span class="fu">paste0</span>(<span class="st">"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="</span>, api_key),</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    httr<span class="sc">::</span><span class="fu">add_headers</span>(<span class="st">"Content-Type"</span> <span class="ot">=</span> <span class="st">"application/json"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">body =</span> jsonlite<span class="sc">::</span><span class="fu">toJSON</span>(</span>
+<span id="cb6-5"><a href="#cb6-5"></a>      <span class="fu">list</span>(</span>
+<span id="cb6-6"><a href="#cb6-6"></a>        <span class="at">email =</span> email,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>        <span class="at">password =</span> password,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>        <span class="at">returnSecureToken =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>      ),</span>
+<span id="cb6-10"><a href="#cb6-10"></a>      <span class="at">auto_unbox =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    )</span>
+<span id="cb6-12"><a href="#cb6-12"></a>  )</span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="fu">return</span>(httr<span class="sc">::</span><span class="fu">content</span>(r))</span>
+<span id="cb6-14"><a href="#cb6-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>Use the function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>user <span class="ot">&lt;-</span> <span class="fu">sign.in</span>(<span class="st">"user_email"</span>,  <span class="st">"user_password"</span>, api_key)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>accessToken <span class="ot">&lt;-</span> user<span class="sc">$</span>idToken</span>
-<span id="cb4-3"><a href="#cb4-3"></a>email <span class="ot">&lt;-</span> user<span class="sc">$</span>email</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>user <span class="ot">&lt;-</span> <span class="fu">sign.in</span>(<span class="st">"user_email"</span>,  <span class="st">"user_password"</span>, api_key)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>accessToken <span class="ot">&lt;-</span> user<span class="sc">$</span>idToken</span>
+<span id="cb7-3"><a href="#cb7-3"></a>email <span class="ot">&lt;-</span> user<span class="sc">$</span>email</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -567,15 +692,15 @@ Umair Durrani
 <div class="column" style="width:50%;">
 <p>User Interface (UI):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">actionButton</span>(<span class="at">inputId =</span> <span class="st">"sign_out"</span>, <span class="at">label =</span> <span class="st">"Sign Out"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">actionButton</span>(<span class="at">inputId =</span> <span class="st">"sign_out"</span>, <span class="at">label =</span> <span class="st">"Sign Out"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Server:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>sign_out, {</span>
-<span id="cb6-2"><a href="#cb6-2"></a>    polished<span class="sc">::</span><span class="fu">sign_out_from_shiny</span>()</span>
-<span id="cb6-3"><a href="#cb6-3"></a>    session<span class="sc">$</span><span class="fu">reload</span>()</span>
-<span id="cb6-4"><a href="#cb6-4"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>sign_out, {</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    polished<span class="sc">::</span><span class="fu">sign_out_from_shiny</span>()</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    session<span class="sc">$</span><span class="fu">reload</span>()</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -587,45 +712,45 @@ Umair Durrani
 <div class="column" style="width:60%;">
 <p>UI:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">tagList</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># sex</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">radioGroupButtons</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">inputId =</span> <span class="st">"sex"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">label =</span> <span class="st">"Are you a girl or a boy?"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Girl"</span> <span class="ot">=</span> 1L, <span class="st">"Boy"</span> <span class="ot">=</span> 0L),</span>
-<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb7-9"><a href="#cb7-9"></a>  ),</span>
-<span id="cb7-10"><a href="#cb7-10"></a>  </span>
-<span id="cb7-11"><a href="#cb7-11"></a>  <span class="co"># age</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">sliderInput</span>(</span>
-<span id="cb7-13"><a href="#cb7-13"></a>    <span class="at">inputId =</span> <span class="st">"age"</span>,</span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">label =</span> <span class="st">"What is your age?"</span>,</span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">min =</span> <span class="dv">12</span>,</span>
-<span id="cb7-16"><a href="#cb7-16"></a>    <span class="at">max =</span> <span class="dv">18</span>,</span>
-<span id="cb7-17"><a href="#cb7-17"></a>    <span class="at">value =</span> <span class="dv">15</span>,</span>
-<span id="cb7-18"><a href="#cb7-18"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>  ),</span>
-<span id="cb7-20"><a href="#cb7-20"></a>  </span>
-<span id="cb7-21"><a href="#cb7-21"></a>  <span class="co"># career</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a>  <span class="fu">radioGroupButtons</span>(</span>
-<span id="cb7-23"><a href="#cb7-23"></a>    <span class="at">inputId =</span> <span class="st">"career"</span>,</span>
-<span id="cb7-24"><a href="#cb7-24"></a>    <span class="at">label =</span> <span class="st">"I am a career tribute."</span>,</span>
-<span id="cb7-25"><a href="#cb7-25"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Yes"</span> <span class="ot">=</span> 1L, <span class="st">"No"</span> <span class="ot">=</span> 0L),</span>
-<span id="cb7-26"><a href="#cb7-26"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
-<span id="cb7-27"><a href="#cb7-27"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb7-28"><a href="#cb7-28"></a>  ),</span>
-<span id="cb7-29"><a href="#cb7-29"></a>  </span>
-<span id="cb7-30"><a href="#cb7-30"></a>  <span class="co"># rating</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a>  <span class="fu">sliderInput</span>(</span>
-<span id="cb7-32"><a href="#cb7-32"></a>    <span class="at">inputId =</span> <span class="st">"rating"</span>,</span>
-<span id="cb7-33"><a href="#cb7-33"></a>    <span class="at">label =</span> <span class="st">"How would you rate your survival skills?"</span>,</span>
-<span id="cb7-34"><a href="#cb7-34"></a>    <span class="at">min =</span> <span class="dv">3</span>,</span>
-<span id="cb7-35"><a href="#cb7-35"></a>    <span class="at">max =</span> <span class="dv">11</span>,</span>
-<span id="cb7-36"><a href="#cb7-36"></a>    <span class="at">value =</span> <span class="dv">5</span>,</span>
-<span id="cb7-37"><a href="#cb7-37"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
-<span id="cb7-38"><a href="#cb7-38"></a>  )</span>
-<span id="cb7-39"><a href="#cb7-39"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">tagList</span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># sex</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">radioGroupButtons</span>(</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">inputId =</span> <span class="st">"sex"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">label =</span> <span class="st">"Are you a girl or a boy?"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Girl"</span> <span class="ot">=</span> 1L, <span class="st">"Boy"</span> <span class="ot">=</span> 0L),</span>
+<span id="cb10-7"><a href="#cb10-7"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  ),</span>
+<span id="cb10-10"><a href="#cb10-10"></a>  </span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="co"># age</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">sliderInput</span>(</span>
+<span id="cb10-13"><a href="#cb10-13"></a>    <span class="at">inputId =</span> <span class="st">"age"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14"></a>    <span class="at">label =</span> <span class="st">"What is your age?"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15"></a>    <span class="at">min =</span> <span class="dv">12</span>,</span>
+<span id="cb10-16"><a href="#cb10-16"></a>    <span class="at">max =</span> <span class="dv">18</span>,</span>
+<span id="cb10-17"><a href="#cb10-17"></a>    <span class="at">value =</span> <span class="dv">15</span>,</span>
+<span id="cb10-18"><a href="#cb10-18"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>  ),</span>
+<span id="cb10-20"><a href="#cb10-20"></a>  </span>
+<span id="cb10-21"><a href="#cb10-21"></a>  <span class="co"># career</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a>  <span class="fu">radioGroupButtons</span>(</span>
+<span id="cb10-23"><a href="#cb10-23"></a>    <span class="at">inputId =</span> <span class="st">"career"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24"></a>    <span class="at">label =</span> <span class="st">"I am a career tribute."</span>,</span>
+<span id="cb10-25"><a href="#cb10-25"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Yes"</span> <span class="ot">=</span> 1L, <span class="st">"No"</span> <span class="ot">=</span> 0L),</span>
+<span id="cb10-26"><a href="#cb10-26"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb10-28"><a href="#cb10-28"></a>  ),</span>
+<span id="cb10-29"><a href="#cb10-29"></a>  </span>
+<span id="cb10-30"><a href="#cb10-30"></a>  <span class="co"># rating</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a>  <span class="fu">sliderInput</span>(</span>
+<span id="cb10-32"><a href="#cb10-32"></a>    <span class="at">inputId =</span> <span class="st">"rating"</span>,</span>
+<span id="cb10-33"><a href="#cb10-33"></a>    <span class="at">label =</span> <span class="st">"How would you rate your survival skills?"</span>,</span>
+<span id="cb10-34"><a href="#cb10-34"></a>    <span class="at">min =</span> <span class="dv">3</span>,</span>
+<span id="cb10-35"><a href="#cb10-35"></a>    <span class="at">max =</span> <span class="dv">11</span>,</span>
+<span id="cb10-36"><a href="#cb10-36"></a>    <span class="at">value =</span> <span class="dv">5</span>,</span>
+<span id="cb10-37"><a href="#cb10-37"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a>  )</span>
+<span id="cb10-39"><a href="#cb10-39"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <p><img data-src="shiny_form.png"></p>
@@ -638,103 +763,148 @@ Umair Durrani
 <div class="column" style="width:50%;">
 <p>UI:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="4|13|23|32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">tagList</span>(</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="co"># sex</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">radioGroupButtons</span>(</span>
-<span id="cb8-4"><a href="#cb8-4"></a>    <span class="at">inputId =</span> <span class="st">"sex"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5"></a>    <span class="at">label =</span> <span class="st">"Are you a girl or a boy?"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Girl"</span> <span class="ot">=</span> 1L, <span class="st">"Boy"</span> <span class="ot">=</span> 0L),</span>
-<span id="cb8-7"><a href="#cb8-7"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb8-9"><a href="#cb8-9"></a>  ),</span>
-<span id="cb8-10"><a href="#cb8-10"></a>  </span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="co"># age</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>  <span class="fu">sliderInput</span>(</span>
-<span id="cb8-13"><a href="#cb8-13"></a>    <span class="at">inputId =</span> <span class="st">"age"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14"></a>    <span class="at">label =</span> <span class="st">"What is your age?"</span>,</span>
-<span id="cb8-15"><a href="#cb8-15"></a>    <span class="at">min =</span> <span class="dv">12</span>,</span>
-<span id="cb8-16"><a href="#cb8-16"></a>    <span class="at">max =</span> <span class="dv">18</span>,</span>
-<span id="cb8-17"><a href="#cb8-17"></a>    <span class="at">value =</span> <span class="dv">15</span>,</span>
-<span id="cb8-18"><a href="#cb8-18"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a>  ),</span>
-<span id="cb8-20"><a href="#cb8-20"></a>  </span>
-<span id="cb8-21"><a href="#cb8-21"></a>  <span class="co"># career</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>  <span class="fu">radioGroupButtons</span>(</span>
-<span id="cb8-23"><a href="#cb8-23"></a>    <span class="at">inputId =</span> <span class="st">"career"</span>,</span>
-<span id="cb8-24"><a href="#cb8-24"></a>    <span class="at">label =</span> <span class="st">"I am a career tribute."</span>,</span>
-<span id="cb8-25"><a href="#cb8-25"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Yes"</span> <span class="ot">=</span> 1L, <span class="st">"No"</span> <span class="ot">=</span> 0L),</span>
-<span id="cb8-26"><a href="#cb8-26"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
-<span id="cb8-27"><a href="#cb8-27"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
-<span id="cb8-28"><a href="#cb8-28"></a>  ),</span>
-<span id="cb8-29"><a href="#cb8-29"></a>  </span>
-<span id="cb8-30"><a href="#cb8-30"></a>  <span class="co"># rating</span></span>
-<span id="cb8-31"><a href="#cb8-31"></a>  <span class="fu">sliderInput</span>(</span>
-<span id="cb8-32"><a href="#cb8-32"></a>    <span class="at">inputId =</span> <span class="st">"rating"</span>,</span>
-<span id="cb8-33"><a href="#cb8-33"></a>    <span class="at">label =</span> <span class="st">"How would you rate your survival skills?"</span>,</span>
-<span id="cb8-34"><a href="#cb8-34"></a>    <span class="at">min =</span> <span class="dv">3</span>,</span>
-<span id="cb8-35"><a href="#cb8-35"></a>    <span class="at">max =</span> <span class="dv">11</span>,</span>
-<span id="cb8-36"><a href="#cb8-36"></a>    <span class="at">value =</span> <span class="dv">5</span>,</span>
-<span id="cb8-37"><a href="#cb8-37"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
-<span id="cb8-38"><a href="#cb8-38"></a>  )</span>
-<span id="cb8-39"><a href="#cb8-39"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="4|13|23|32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">tagList</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="co"># sex</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">radioGroupButtons</span>(</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">inputId =</span> <span class="st">"sex"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">label =</span> <span class="st">"Are you a girl or a boy?"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Girl"</span> <span class="ot">=</span> 1L, <span class="st">"Boy"</span> <span class="ot">=</span> 0L),</span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb11-9"><a href="#cb11-9"></a>  ),</span>
+<span id="cb11-10"><a href="#cb11-10"></a>  </span>
+<span id="cb11-11"><a href="#cb11-11"></a>  <span class="co"># age</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">sliderInput</span>(</span>
+<span id="cb11-13"><a href="#cb11-13"></a>    <span class="at">inputId =</span> <span class="st">"age"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14"></a>    <span class="at">label =</span> <span class="st">"What is your age?"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15"></a>    <span class="at">min =</span> <span class="dv">12</span>,</span>
+<span id="cb11-16"><a href="#cb11-16"></a>    <span class="at">max =</span> <span class="dv">18</span>,</span>
+<span id="cb11-17"><a href="#cb11-17"></a>    <span class="at">value =</span> <span class="dv">15</span>,</span>
+<span id="cb11-18"><a href="#cb11-18"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a>  ),</span>
+<span id="cb11-20"><a href="#cb11-20"></a>  </span>
+<span id="cb11-21"><a href="#cb11-21"></a>  <span class="co"># career</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a>  <span class="fu">radioGroupButtons</span>(</span>
+<span id="cb11-23"><a href="#cb11-23"></a>    <span class="at">inputId =</span> <span class="st">"career"</span>,</span>
+<span id="cb11-24"><a href="#cb11-24"></a>    <span class="at">label =</span> <span class="st">"I am a career tribute."</span>,</span>
+<span id="cb11-25"><a href="#cb11-25"></a>    <span class="at">choices =</span> <span class="fu">list</span>(<span class="st">"Yes"</span> <span class="ot">=</span> 1L, <span class="st">"No"</span> <span class="ot">=</span> 0L),</span>
+<span id="cb11-26"><a href="#cb11-26"></a>    <span class="at">status =</span> <span class="st">"primary"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27"></a>    <span class="at">selected =</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
+<span id="cb11-28"><a href="#cb11-28"></a>  ),</span>
+<span id="cb11-29"><a href="#cb11-29"></a>  </span>
+<span id="cb11-30"><a href="#cb11-30"></a>  <span class="co"># rating</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>  <span class="fu">sliderInput</span>(</span>
+<span id="cb11-32"><a href="#cb11-32"></a>    <span class="at">inputId =</span> <span class="st">"rating"</span>,</span>
+<span id="cb11-33"><a href="#cb11-33"></a>    <span class="at">label =</span> <span class="st">"How would you rate your survival skills?"</span>,</span>
+<span id="cb11-34"><a href="#cb11-34"></a>    <span class="at">min =</span> <span class="dv">3</span>,</span>
+<span id="cb11-35"><a href="#cb11-35"></a>    <span class="at">max =</span> <span class="dv">11</span>,</span>
+<span id="cb11-36"><a href="#cb11-36"></a>    <span class="at">value =</span> <span class="dv">5</span>,</span>
+<span id="cb11-37"><a href="#cb11-37"></a>    <span class="at">step =</span> <span class="dv">1</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a>  )</span>
+<span id="cb11-39"><a href="#cb11-39"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Server:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="4|5|6|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Form inputs in one list</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>form_inputs <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">list</span>(</span>
-<span id="cb9-4"><a href="#cb9-4"></a>   <span class="at">sex    =</span> input<span class="sc">$</span>sex,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>   <span class="at">age    =</span> input<span class="sc">$</span>age,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>   <span class="at">career =</span> input<span class="sc">$</span>career,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>   <span class="at">rating =</span> input<span class="sc">$</span>rating</span>
-<span id="cb9-8"><a href="#cb9-8"></a>  )</span>
-<span id="cb9-9"><a href="#cb9-9"></a>})</span>
-<span id="cb9-10"><a href="#cb9-10"></a></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co"># Send data to firestore when 'Submit' is clicked</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="fu">observeEvent</span>(</span>
-<span id="cb9-13"><a href="#cb9-13"></a>      input<span class="sc">$</span>form_submit,</span>
-<span id="cb9-14"><a href="#cb9-14"></a>      {</span>
-<span id="cb9-15"><a href="#cb9-15"></a>      <span class="do">## Convert data to json structure</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>        form_data_list <span class="ot">&lt;-</span> <span class="fu">toJSON</span>(<span class="fu">list</span>(</span>
-<span id="cb9-17"><a href="#cb9-17"></a>          <span class="at">fields =</span> <span class="fu">list</span>(</span>
-<span id="cb9-18"><a href="#cb9-18"></a>            <span class="at">uid =</span> <span class="fu">list</span>(<span class="st">"stringValue"</span> <span class="ot">=</span> <span class="fu">email</span>()),</span>
-<span id="cb9-19"><a href="#cb9-19"></a>            <span class="at">Sex =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"sex"</span>]]),</span>
-<span id="cb9-20"><a href="#cb9-20"></a>            <span class="at">Age =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"age"</span>]]),</span>
-<span id="cb9-21"><a href="#cb9-21"></a>            <span class="at">Career =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"career"</span>]]),</span>
-<span id="cb9-22"><a href="#cb9-22"></a>            <span class="at">Rating =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"rating"</span>]])</span>
-<span id="cb9-23"><a href="#cb9-23"></a>          )</span>
-<span id="cb9-24"><a href="#cb9-24"></a>        ), <span class="at">auto_unbox =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a>        <span class="do">## writing data</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a>        endpoint_quiz <span class="ot">&lt;-</span> <span class="st">"projects/gdg-demo-b8928/databases/(default)/documents/Quiz"</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a>        </span>
-<span id="cb9-29"><a href="#cb9-29"></a>        </span>
-<span id="cb9-30"><a href="#cb9-30"></a>        write.db <span class="ot">&lt;-</span> <span class="cf">function</span>(db_endpoint, data, auth_token) {</span>
-<span id="cb9-31"><a href="#cb9-31"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(<span class="fu">sprintf</span>(<span class="st">"https://firestore.googleapis.com/v1beta1/%s"</span>, db_endpoint),</span>
-<span id="cb9-32"><a href="#cb9-32"></a>    httr<span class="sc">::</span><span class="fu">add_headers</span>(</span>
-<span id="cb9-33"><a href="#cb9-33"></a>      <span class="st">"Content-Type"</span> <span class="ot">=</span> <span class="st">"application/json"</span>,</span>
-<span id="cb9-34"><a href="#cb9-34"></a>      <span class="st">"Authorization"</span> <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>, auth_token)</span>
-<span id="cb9-35"><a href="#cb9-35"></a>    ),</span>
-<span id="cb9-36"><a href="#cb9-36"></a>    <span class="at">body =</span> data</span>
-<span id="cb9-37"><a href="#cb9-37"></a>  )</span>
-<span id="cb9-38"><a href="#cb9-38"></a>  <span class="fu">return</span>(r)</span>
-<span id="cb9-39"><a href="#cb9-39"></a>}</span>
-<span id="cb9-40"><a href="#cb9-40"></a>        </span>
-<span id="cb9-41"><a href="#cb9-41"></a>        write_request_quiz <span class="ot">&lt;-</span> <span class="fu">write.db</span>(</span>
-<span id="cb9-42"><a href="#cb9-42"></a>          <span class="at">db_endpoint =</span> <span class="fu">paste0</span>(endpoint_quiz, <span class="st">"?documentId="</span>, <span class="fu">email</span>()),</span>
-<span id="cb9-43"><a href="#cb9-43"></a>          <span class="at">data =</span> form_data_list,</span>
-<span id="cb9-44"><a href="#cb9-44"></a>          <span class="at">auth_token =</span> <span class="fu">accessToken</span>()</span>
-<span id="cb9-45"><a href="#cb9-45"></a>        )</span>
-<span id="cb9-46"><a href="#cb9-46"></a>    }</span>
-<span id="cb9-47"><a href="#cb9-47"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="4-7|12-48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Form inputs in one list</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>form_inputs <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">list</span>(</span>
+<span id="cb12-4"><a href="#cb12-4"></a>   <span class="at">sex    =</span> input<span class="sc">$</span>sex,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>   <span class="at">age    =</span> input<span class="sc">$</span>age,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>   <span class="at">career =</span> input<span class="sc">$</span>career,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>   <span class="at">rating =</span> input<span class="sc">$</span>rating</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  )</span>
+<span id="cb12-9"><a href="#cb12-9"></a>})</span>
+<span id="cb12-10"><a href="#cb12-10"></a></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co"># Send data to firestore when 'Submit' is clicked</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="fu">observeEvent</span>(</span>
+<span id="cb12-13"><a href="#cb12-13"></a>      input<span class="sc">$</span>form_submit,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>      {</span>
+<span id="cb12-15"><a href="#cb12-15"></a>      <span class="do">## Convert data to json structure</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>        form_data_list <span class="ot">&lt;-</span> <span class="fu">toJSON</span>(<span class="fu">list</span>(</span>
+<span id="cb12-17"><a href="#cb12-17"></a>          <span class="at">fields =</span> <span class="fu">list</span>(</span>
+<span id="cb12-18"><a href="#cb12-18"></a>            <span class="at">uid =</span> <span class="fu">list</span>(<span class="st">"stringValue"</span> <span class="ot">=</span> <span class="fu">email</span>()),</span>
+<span id="cb12-19"><a href="#cb12-19"></a>            <span class="at">Sex =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"sex"</span>]]),</span>
+<span id="cb12-20"><a href="#cb12-20"></a>            <span class="at">Age =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"age"</span>]]),</span>
+<span id="cb12-21"><a href="#cb12-21"></a>            <span class="at">Career =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"career"</span>]]),</span>
+<span id="cb12-22"><a href="#cb12-22"></a>            <span class="at">Rating =</span> <span class="fu">list</span>(<span class="st">"integerValue"</span> <span class="ot">=</span> <span class="fu">form_inputs</span>()[[<span class="st">"rating"</span>]])</span>
+<span id="cb12-23"><a href="#cb12-23"></a>          )</span>
+<span id="cb12-24"><a href="#cb12-24"></a>        ), <span class="at">auto_unbox =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-25"><a href="#cb12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26"></a>        <span class="do">## writing data</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>        endpoint_quiz <span class="ot">&lt;-</span> <span class="st">"projects/gdg-demo-b8928/databases/(default)/documents/Quiz"</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a>        </span>
+<span id="cb12-29"><a href="#cb12-29"></a>        </span>
+<span id="cb12-30"><a href="#cb12-30"></a>        write.db <span class="ot">&lt;-</span> <span class="cf">function</span>(db_endpoint, data, auth_token) {</span>
+<span id="cb12-31"><a href="#cb12-31"></a>  r <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(<span class="fu">sprintf</span>(<span class="st">"https://firestore.googleapis.com/v1beta1/%s"</span>, db_endpoint),</span>
+<span id="cb12-32"><a href="#cb12-32"></a>    httr<span class="sc">::</span><span class="fu">add_headers</span>(</span>
+<span id="cb12-33"><a href="#cb12-33"></a>      <span class="st">"Content-Type"</span> <span class="ot">=</span> <span class="st">"application/json"</span>,</span>
+<span id="cb12-34"><a href="#cb12-34"></a>      <span class="st">"Authorization"</span> <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>, auth_token)</span>
+<span id="cb12-35"><a href="#cb12-35"></a>    ),</span>
+<span id="cb12-36"><a href="#cb12-36"></a>    <span class="at">body =</span> data</span>
+<span id="cb12-37"><a href="#cb12-37"></a>  )</span>
+<span id="cb12-38"><a href="#cb12-38"></a>  <span class="fu">return</span>(r)</span>
+<span id="cb12-39"><a href="#cb12-39"></a>}</span>
+<span id="cb12-40"><a href="#cb12-40"></a>        </span>
+<span id="cb12-41"><a href="#cb12-41"></a>        write_request_quiz <span class="ot">&lt;-</span> <span class="fu">write.db</span>(</span>
+<span id="cb12-42"><a href="#cb12-42"></a>          <span class="at">db_endpoint =</span> <span class="fu">paste0</span>(endpoint_quiz, <span class="st">"?documentId="</span>, <span class="fu">email</span>()),</span>
+<span id="cb12-43"><a href="#cb12-43"></a>          <span class="at">data =</span> form_data_list,</span>
+<span id="cb12-44"><a href="#cb12-44"></a>          <span class="at">auth_token =</span> <span class="fu">accessToken</span>()</span>
+<span id="cb12-45"><a href="#cb12-45"></a>        )</span>
+<span id="cb12-46"><a href="#cb12-46"></a>    }</span>
+<span id="cb12-47"><a href="#cb12-47"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="on-firestore" class="slide level2">
+<h2>On Firestore</h2>
+
+<img data-src="quiz_fs.PNG" class="r-stretch"></section>
+<section id="display-prediction" class="slide level2">
+<h2>Display Prediction</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>User Interface (UI):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">uiOutput</span>(<span class="st">"display_pred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Server:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>  output<span class="sc">$</span>display_pred <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb14-2"><a href="#cb14-2"></a>      <span class="co"># requires user input</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a>      <span class="fu">req</span>(<span class="fu">form_list</span>())</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    </span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="co"># Predictions</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    pred_text <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb14-7"><a href="#cb14-7"></a>      <span class="fu">req</span>(form_list)</span>
+<span id="cb14-8"><a href="#cb14-8"></a>      user_inputs <span class="ot">&lt;-</span> <span class="fu">form_list</span>()<span class="sc">$</span>in_form</span>
+<span id="cb14-9"><a href="#cb14-9"></a></span>
+<span id="cb14-10"><a href="#cb14-10"></a>      user_preds <span class="ot">&lt;-</span> <span class="fu">make_prediction</span>(user_inputs<span class="sc">$</span>sex,</span>
+<span id="cb14-11"><a href="#cb14-11"></a>                                    user_inputs<span class="sc">$</span>age,</span>
+<span id="cb14-12"><a href="#cb14-12"></a>                                    user_inputs<span class="sc">$</span>career,</span>
+<span id="cb14-13"><a href="#cb14-13"></a>                                    user_inputs<span class="sc">$</span>rating)</span>
+<span id="cb14-14"><a href="#cb14-14"></a>      <span class="cf">if</span>(<span class="fu">is.null</span>(user_preds)){</span>
+<span id="cb14-15"><a href="#cb14-15"></a>        <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb14-16"><a href="#cb14-16"></a>      }</span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a>      <span class="co"># PRETTY PRINTING OF PREDICTIONS</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>    })</span>
+<span id="cb14-20"><a href="#cb14-20"></a>  })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+
+<img data-src="pretty_print.PNG" class="r-stretch"></section></section>
+<section id="thank-you" class="title-slide slide level1 center" data-background-color="#FFA500">
+<h1>Thank you</h1>
+<p><a href="https://umair.shinyapps.io/GoogleDevelopersGroupShiny/_w_6fdce7ab/?page=sign_in">Live app link</a></p>
+<p><a href="https://github.com/durraniu/gdg">Github Repo</a></p>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
